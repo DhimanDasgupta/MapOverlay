@@ -1,0 +1,68 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.1"
+    defaultConfig {
+        applicationId "com.dhimandasgupta.mapoverlay"
+        minSdkVersion 16
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+ext {
+    supportLibVersion = '26.0.1'
+    googlePlayServicesVersion = '11.0.4'
+    androidMapUtilsVersion = '0.4+'
+    daggerVersion = '2.11'
+    retrofitVersion = '2.1.0'
+    gsonConverterVersion = '2.1.0'
+    okhttpVersion = '3.8.0'
+    picassoVersion = '2.5.2'
+    archVersion = '1.0.0-alpha1'
+
+    supportLibAppCompat = "com.android.support:appcompat-v7:$supportLibVersion"
+    supportLibDesign = "com.android.support:design:$supportLibVersion"
+    googlePlayService = "com.google.android.gms:play-services-maps:$googlePlayServicesVersion"
+    androidMapUtils = "com.google.maps.android:android-maps-utils:$androidMapUtilsVersion"
+
+    archRuntime = "android.arch.lifecycle:runtime:$archVersion"
+    archExtension = "android.arch.lifecycle:extensions:$archVersion"
+    archCompiler = "android.arch.lifecycle:compiler:$archVersion"
+    roomRuntime = "android.arch.persistence.room:runtime:$archVersion"
+    roomCompiler = "android.arch.persistence.room:compiler:$archVersion"
+    dagger = "com.google.dagger:dagger:$daggerVersion"
+    daggerCompiler = "com.google.dagger:dagger-compiler:$daggerVersion"
+    daggerAndroid = "com.google.dagger:dagger-android:$daggerVersion"
+    daggerAndroidSupport = "com.google.dagger:dagger-android-support:$daggerVersion"
+    daggerAndroidProcessor = "com.google.dagger:dagger-android-processor:$daggerVersion"
+    retrofit = "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    gsonConverter = "com.squareup.retrofit2:converter-gson:$gsonConverterVersion"
+    okhttp = "com.squareup.okhttp3:okhttp:$okhttpVersion"
+    picasso = "com.squareup.picasso:picasso:$picassoVersion"
+}
+
+dependencies {
+    // Android Dependencies
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation supportLibAppCompat
+    implementation supportLibDesign
+    implementation googlePlayService
+    implementation androidMapUtils
+
+    // JUnit Test Dependencies
+    testImplementation 'junit:junit:4.12'
+
+    // Android Test Dependencies
+    androidTestImplementation 'com.android.support.test:runner:1.0.0'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.0'
+}
