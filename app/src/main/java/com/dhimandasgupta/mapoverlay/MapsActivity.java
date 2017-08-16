@@ -5,14 +5,17 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatTextView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.ViewTreeObserver;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -30,6 +33,7 @@ import java.util.List;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, OnTouchListener {
 
+    private Toolbar mToolbar;
     private GoogleMap mMap;
     private View mOverlayView;
     private AppCompatTextView mTextView;
@@ -57,6 +61,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+
+        mToolbar = findViewById(R.id.toolbar);
+        final AppBarLayout appBarLayout = findViewById(R.id.appbar);
+        final FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) appBarLayout.getLayoutParams();
+        params.topMargin = getStatusBarHeight();
+        setSupportActionBar(mToolbar);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         final SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -251,5 +261,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         } catch (Resources.NotFoundException e) {
             //Log.e(TAG, "Can't find style. Error: ", e);
         }
+    }
+
+    public int getStatusBarHeight() {
+        int result = 0;
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
     }
 }
